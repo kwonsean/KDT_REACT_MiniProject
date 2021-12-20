@@ -2,25 +2,29 @@ import React from 'react'
 import { Table } from 'reactstrap'
 import BoardItem from './BoardItem'
 
-export default function BoardList({ boardList }) {
+export default function BoardList({ boardList, selectAllBoardList }) {
   return (
     <>
       <Table dark hover size='xl' striped>
         <thead>
           <tr>
-            <th style={{ width: '6%' }}>게시글 번호</th>
+            <th style={{ width: '10%' }}>게시글 번호</th>
             <th style={{ width: '20%' }}>제목</th>
             <th style={{ width: '25%' }}>내용</th>
             <th style={{ width: '15%' }}>작성자</th>
-            <th style={{ width: '15%' }}>작성일자</th>
-            <th style={{ width: '4%' }}>조회수</th>
-            <th style={{ width: '7.5%' }}></th>
-            <th style={{ width: '7.5%' }}></th>
+            <th style={{ width: '10%' }}>작성일자</th>
+            <th style={{ width: '10%' }}>조회수</th>
+            <th style={{ width: '10%' }}></th>
           </tr>
         </thead>
         <tbody>
           {boardList.map((boardData, index) => (
-            <BoardItem key={boardData.id} boardData={boardData} index={index} />
+            <BoardItem
+              key={boardData.id}
+              boardData={boardData}
+              selectAllBoardList={selectAllBoardList}
+              index={index}
+            />
           ))}
         </tbody>
       </Table>

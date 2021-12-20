@@ -33,7 +33,10 @@ const Board = () => {
   return (
     <Container>
       <SearchBar setBoardList={setBoardList} />
-      <BoardList boardList={boardList} />
+      <BoardList
+        boardList={boardList}
+        selectAllBoardList={selectAllBoardList}
+      />
       <Button
         onClick={() => setShowModal(true)}
         style={{ float: 'right', marginRight: '20px' }}
