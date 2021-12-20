@@ -13,9 +13,26 @@ export default function ShoppingList({
 }) {
   // 구매 버튼 클릭시 그 상품에 대한 정보 객체 매개변수로 받음
   const clickBuyBtn = (item) => {
+    const {
+      brand,
+      category1,
+      category2,
+      category3,
+      category4,
+      hprice: h_price,
+      image,
+      link,
+      lprice: l_price,
+      maker,
+      mallName,
+      productId: product_id,
+      productType: product_type,
+      title,
+    } = item
+    console.log(item)
     Swal.fire({
-      title: '상품을 구매하시겠습니까?',
-      text: `상품 가격은 ${item.lprice.replace(
+      title: '상품을 찜 하시겠습니까?',
+      text: `상품 가격은 ${l_price.replace(
         /\B(?=(\d{3})+(?!\d))/g,
         ','
       )}원 입니다.`,
@@ -23,26 +40,42 @@ export default function ShoppingList({
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: '구매',
+      confirmButtonText: '찜하기',
       cancelButtonText: '취소',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: `${item.title}을 구매하였습니다.`,
-          imageUrl: `${item.image}`,
-          imageWidth: 400,
-          imageHeight: 400,
-          imageAlt: '상품 이미지',
-          confirmButtonText: '확인',
-        })
         axios
-          .post(`/shopping?type=buyItem`, {
-            item,
+          .post(`api/naverApi?type=save`, {
+            brand,
+            category1,
+            category2,
+            category3,
+            category4,
+            h_price,
+            image,
+            l_price,
+            link,
+            maker,
+            mall_name: mallName,
+            product_id,
+            product_type,
+            title,
+            product_count: 1,
           })
-          .then((response) => {})
+          .then((response) => {
+            console.log(response)
+            Swal.fire({
+              title: `${title}을 찜 하였습니다.`,
+              imageUrl: `${image}`,
+              imageWidth: 400,
+              imageHeight: 400,
+              imageAlt: '상품 이미지',
+              confirmButtonText: '확인',
+            })
+          })
           .catch((error) => {
             console.log(error)
-            alert('구매에 실패했습니다!')
+            alert('오류가 발생하였습니다.')
           })
       }
     })
@@ -56,7 +89,7 @@ export default function ShoppingList({
           <Col xs='6'>상품 명</Col>
           <Col xs='2'>최저가</Col>
           <Col xs='2'>판매처</Col>
-          <Col xs='1'>구매</Col>
+          <Col xs='1'>찜하기</Col>
         </Row>
       )}
 
@@ -83,7 +116,7 @@ export default function ShoppingList({
                 <span>{item.mallName}</span>
               </Col>
               <Col xs='1'>
-                <Button onClick={() => clickBuyBtn(item)}>구매</Button>
+                <Button onClick={() => clickBuyBtn(item)}>찜하기</Button>
               </Col>
             </Row>
           )

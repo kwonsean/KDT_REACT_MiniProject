@@ -9,7 +9,6 @@ const Naver = (props) => {
   const [totalResults, setTotalResults] = useState(0)
   return (
     <Container>
-      <h2>상품 검색 & 찜하기</h2>
       <SearchBar
         setSearchList={setSearchList}
         searchList={searchList}
