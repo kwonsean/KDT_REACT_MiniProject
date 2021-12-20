@@ -41,6 +41,17 @@ export default function ProductSearchBar({ selectedProductList }) {
     selectedProductList(category1, category2, category3, category4)
     // console.log('search!', category1, category2, category3, category4)
   }
+  const clickResetBtn = () => {
+    setCategory1('')
+    setCategory1List([])
+    setCategory2List([])
+    setCategory2('')
+    setCategory3List([])
+    setCategory3('')
+    setCategory4List([])
+    setCategory4('')
+    selectedProductList()
+  }
 
   useEffect(() => {
     axios
@@ -148,10 +159,13 @@ export default function ProductSearchBar({ selectedProductList }) {
         </Input>
       </Col>
 
-      <Col xs='2'>
-        <Button onClick={clickSearchBtn}>검색</Button>
+      <Col xs='1'>
+        <Button onClick={clickSearchBtn}>적용</Button>
       </Col>
-      <Col xs='1'></Col>
+
+      <Col xs='2'>
+        <Button onClick={clickResetBtn}>옵션 초기화</Button>{' '}
+      </Col>
     </Row>
   )
 }
