@@ -4,7 +4,7 @@ import UpdateItem from './UpdateItem'
 import DetailBoard from './DetailBoard'
 import axios from 'axios'
 
-function BoardItem({ index, boardData, selectAllBoardList }) {
+function BoardItem({ index, boardData, selectAllBoardList, plusIndex }) {
   // console.log('data!!!!!!!', boardData)
   const [showUpdate, setShowUpdate] = useState(false)
   const [showDetail, setShowDetail] = useState(false)
@@ -28,7 +28,7 @@ function BoardItem({ index, boardData, selectAllBoardList }) {
 
   return (
     <tr onClick={clickItem} style={{ cursor: 'pointer' }}>
-      <td>{index + 1}</td>
+      <td>{index + 1 + (plusIndex - 1) * 10}</td>
       <td>
         {boardData.title.length > 16
           ? `${boardData.title.substring(0, 16)} ...`

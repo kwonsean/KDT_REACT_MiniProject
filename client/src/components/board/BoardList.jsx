@@ -2,7 +2,11 @@ import React from 'react'
 import { Table } from 'reactstrap'
 import BoardItem from './BoardItem'
 
-export default function BoardList({ boardList, selectAllBoardList }) {
+export default function BoardList({
+  boardList,
+  selectAllBoardList,
+  plusIndex,
+}) {
   return (
     <>
       <Table dark hover size='xl' striped>
@@ -24,6 +28,7 @@ export default function BoardList({ boardList, selectAllBoardList }) {
               boardData={boardData}
               selectAllBoardList={selectAllBoardList}
               index={index}
+              plusIndex={plusIndex}
             />
           ))}
         </tbody>
