@@ -38,6 +38,7 @@ const Product = ({ userId }) => {
       <ProductList
         zzimList={zzimList}
         selectedProductList={selectedProductList}
+        userId={userId}
       />
     </Container>
   )
