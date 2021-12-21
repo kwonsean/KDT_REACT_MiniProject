@@ -4,7 +4,7 @@ import { Container } from 'reactstrap'
 import ProductList from './ProductList'
 import ProductSearchBar from './ProductSearchBar'
 
-const Product = ({ userId }) => {
+const Product = ({ userId, cartId }) => {
   const [zzimList, setZzimList] = useState([])
 
   const selectedProductList = (
@@ -39,6 +39,7 @@ const Product = ({ userId }) => {
         zzimList={zzimList}
         selectedProductList={selectedProductList}
         userId={userId}
+        cartId={cartId}
       />
     </Container>
   )
