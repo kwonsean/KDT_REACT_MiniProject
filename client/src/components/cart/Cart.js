@@ -1,11 +1,23 @@
-import React from "react";
+import React from 'react'
+import { Col, Container, Row } from 'reactstrap'
+import CartCardInfo from './CartCardInfo'
+import CartList from './CartList'
+import CartOrder from './CartOrder'
 
-const Cart = (props) => {
+const Cart = ({ userId, cartId }) => {
   return (
-    <div>
-      <h2>장바구니</h2>
-    </div>
-  );
-};
+    <Container>
+      <CartList userId={userId} cartId={cartId} />
+      <Row style={{ marginTop: 40 }}>
+        <Col xs='6'>
+          <CartOrder />
+        </Col>
+        <Col xs='6'>
+          <CartCardInfo />
+        </Col>
+      </Row>
+    </Container>
+  )
+}
 
-export default Cart;
+export default Cart
