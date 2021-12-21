@@ -4,29 +4,22 @@ import { Button, Col, Input, Row } from 'reactstrap'
 import styled from '../naver/ShoppingList.module.css'
 import Swal from 'sweetalert2'
 
-export default function ProductList({ zzimList, selectedProductList, userId }) {
-  console.log('zzim!', zzimList)
+export default function ProductList({
+  zzimList,
+  selectedProductList,
+  userId,
+  cartId,
+}) {
+  // console.log('zzim!', zzimList)
   const buyCount = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   let selectedItems = []
-  const [cartId, setCartId] = useState('')
 
-  // 찜목록 그려지면서 카트아이디 생성해서 저장
-  useEffect(() => {
-    axios
-      .post('api/cart?type=cart_id', {
-        user_id: userId,
-      })
-      .then((cartIdResponse) => {
-        setCartId(cartIdResponse.data.json[0]['cart_id'])
-      })
-      .catch((cartIdError) => console.log(cartIdError))
-  }, [])
+  // cartId 가 장바구니 화면에서도 필요하여 app.js에서 받아와 사용하는것으로 수정
 
   // 수량이 변경될때마다 아이템들을 저장하는 배열 생성
   const selectBuyCount = (e, item) => {
     item = { ...item, addCount: Number(e.target.value) }
     // console.log(item)
-    // setAddCount(e.target.value)
 
     // id가 유일하면 true 이미 있으면 false
     const isAlreadyHave = (currentValue) =>
@@ -45,7 +38,7 @@ export default function ProductList({ zzimList, selectedProductList, userId }) {
       })
     }
 
-    console.log('selectedItems', selectedItems)
+    // console.log('selectedItems', selectedItems)
   }
 
   const clickSaveItemBtn = (item) => {
@@ -96,21 +89,25 @@ export default function ProductList({ zzimList, selectedProductList, userId }) {
         mall_name,
         product_id,
         product_type,
-        product_count: product_count + addCount,
+        // 기본값을 0이 아닌 1로 설정하는 다른 개발자가 있고 내 프로젝트에선 수량 체크 후 그 값을 장바구니에 담는 로직이므로 수정
+        // product_count: product_count + addCount,
+        product_count: addCount,
         title,
       })
       .then((updateProuductCountResponse) => {
         // TODO 카트에 담을 수 있도록 지정
-        console.log(updateProuductCountResponse)
-        console.log(product_id)
+        // console.log(updateProuductCountResponse)
+        // console.log(product_id)
         axios
           .post('api/cart?type=save', {
             cart_id: cartId,
             product_id,
             user_id: userId,
+            amount: addCount,
           })
           .then((cartSaveResponse) => {
-            console.log('cartSaveResponse', cartSaveResponse)
+            // console.log('cartSaveResponse', cartSaveResponse)
+            successSaveCart(addCount)
           })
           .catch((cartSaveError) => {
             console.log(cartSaveError)
@@ -212,6 +209,15 @@ function zeroBuyCount() {
   Swal.fire({
     title: `수량을 선택해주세요!`,
     icon: 'warning',
+    confirmButtonText: '확인',
+  })
+}
+
+function successSaveCart(addCount) {
+  Swal.fire({
+    title: `장바구니에 담았습니다!`,
+    text: `선택한 물건을 장바구니에 ${addCount}개 담았습니다.`,
+    icon: 'success',
     confirmButtonText: '확인',
   })
 }
