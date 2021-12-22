@@ -39,7 +39,10 @@ function App() {
         path='/cart'
         render={() => <Cart userId={userId} cartId={cartId} />}
       />
-      <Route path='/history' render={() => <History userId={userId} />} />
+      <Route
+        path='/history'
+        render={() => <History userId={userId} cartId={cartId} />}
+      />
       <Footer />
     </div>
   )
