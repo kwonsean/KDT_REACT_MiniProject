@@ -4,7 +4,7 @@ import { Card, CardBody, CardFooter, CardHeader, Col, Row } from 'reactstrap'
 import styled from '../naver/ShoppingList.module.css'
 import CartTotalPrice from './CartTotalPrice'
 
-export default function CartList({ userId, cartId, totalPrice }) {
+export default function CartList({ userId, totalPrice }) {
   const [cartList, setCartList] = useState([])
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function CartList({ userId, cartId, totalPrice }) {
         <CardBody
           style={{
             padding: 40,
-            height: 500,
+            // height: 500,
             overflow: 'scroll',
           }}
         >
