@@ -66,6 +66,7 @@ export default function CartOrder({ receiveDataObj, setReceiveDataObj }) {
               valid={tel1Valid}
               invalid={!tel1Valid}
               id='receive_user_tel1'
+              maxLength={3}
               onChange={(e) => changeInput(e)}
             ></Input>
           </Col>
@@ -77,6 +78,7 @@ export default function CartOrder({ receiveDataObj, setReceiveDataObj }) {
               valid={tel2Valid}
               invalid={!tel2Valid}
               id='receive_user_tel2'
+              maxLength={4}
               onChange={(e) => changeInput(e)}
             ></Input>
           </Col>
@@ -88,6 +90,7 @@ export default function CartOrder({ receiveDataObj, setReceiveDataObj }) {
               valid={tel3Valid}
               invalid={!tel3Valid}
               id='receive_user_tel3'
+              maxLength={4}
               onChange={(e) => changeInput(e)}
             ></Input>
           </Col>
