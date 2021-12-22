@@ -3,17 +3,17 @@ import { Col, Container, Row } from 'reactstrap'
 import CartCardInfo from './CartCardInfo'
 import CartList from './CartList'
 import CartOrder from './CartOrder'
+import getTotalPrice from '../modules/getTotalPrice'
 
 const Cart = ({ userId, cartId }) => {
   const [receiveDataObj, setReceiveDataObj] = useState({})
-
-  useEffect(() => {
-    console.log('receiveData', receiveDataObj)
-  }, [receiveDataObj])
+  const [totalPrice, setTotalPrice] = useState('')
+  const getData = getTotalPrice(userId, cartId)
+  getData.then((response) => setTotalPrice(response))
 
   return (
     <Container>
-      <CartList userId={userId} cartId={cartId} />
+      <CartList userId={userId} totalPrice={totalPrice} />
       <Row style={{ marginTop: 40 }}>
         <Col xs='6'>
           <CartOrder
@@ -22,7 +22,12 @@ const Cart = ({ userId, cartId }) => {
           />
         </Col>
         <Col xs='6'>
-          <CartCardInfo />
+          <CartCardInfo
+            userId={userId}
+            cartId={cartId}
+            totalPrice={totalPrice}
+            receiveDataObj={receiveDataObj}
+          />
         </Col>
       </Row>
     </Container>
