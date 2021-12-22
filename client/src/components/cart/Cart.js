@@ -8,8 +8,11 @@ import getTotalPrice from '../modules/getTotalPrice'
 const Cart = ({ userId, cartId }) => {
   const [receiveDataObj, setReceiveDataObj] = useState({})
   const [totalPrice, setTotalPrice] = useState('')
-  const getData = getTotalPrice(userId, cartId)
-  getData.then((response) => setTotalPrice(response))
+
+  useEffect(() => {
+    const getData = getTotalPrice(userId, cartId)
+    getData.then((response) => setTotalPrice(response))
+  }, [])
 
   return (
     <Container>

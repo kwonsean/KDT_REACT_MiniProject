@@ -11,14 +11,17 @@ import Product from './product/Product'
 import Cart from './cart/Cart'
 import History from './history/History'
 import Naver from './naver/Naver'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import getCartId from './modules/getCartId'
 
 function App() {
   const [userId, setUserId] = useState('ksh96@naver.com')
   const [cartId, setCartId] = useState('')
-  const data = getCartId(userId)
-  data.then((data) => setCartId(data))
+
+  useEffect(() => {
+    const data = getCartId(userId)
+    data.then((data) => setCartId(data))
+  }, [])
 
   return (
     <div className='App'>
