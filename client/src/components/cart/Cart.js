@@ -8,15 +8,20 @@ import getTotalPrice from '../modules/getTotalPrice'
 const Cart = ({ userId, cartId }) => {
   const [receiveDataObj, setReceiveDataObj] = useState({})
   const [totalPrice, setTotalPrice] = useState('')
+  const [orderCheck, setOrderCheck] = useState(true)
 
   useEffect(() => {
     const getData = getTotalPrice(userId, cartId)
     getData.then((response) => setTotalPrice(response))
-  }, [])
+  }, [orderCheck])
 
   return (
     <Container>
-      <CartList userId={userId} totalPrice={totalPrice} />
+      <CartList
+        userId={userId}
+        totalPrice={totalPrice}
+        orderCheck={orderCheck}
+      />
       <Row style={{ marginTop: 40 }}>
         <Col xs='6'>
           <CartOrder
@@ -30,6 +35,7 @@ const Cart = ({ userId, cartId }) => {
             cartId={cartId}
             totalPrice={totalPrice}
             receiveDataObj={receiveDataObj}
+            setOrderCheck={setOrderCheck}
           />
         </Col>
       </Row>
