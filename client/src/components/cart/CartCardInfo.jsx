@@ -38,6 +38,7 @@ export default function CartCardInfo({
   cartId,
   totalPrice,
   receiveDataObj,
+  setOrderCheck,
 }) {
   const [cardDataObj, setCardDataObj] = useState({})
   const [cardNameValid, setCardNameValid] = useState(false)
@@ -60,7 +61,7 @@ export default function CartCardInfo({
     // console.log('cardDataObj', cardDataObj)
   }, [changeInputCheck])
 
-  let defaultObj = {
+  const [defaultObj, setDefaultObj] = useState({
     receive_user: null,
     receive_user_tel1: null,
     receive_user_tel2: null,
@@ -80,16 +81,14 @@ export default function CartCardInfo({
     cart_id: cartId,
     total_price: totalPrice,
     complete_yn: 'Y',
-  }
+  })
 
   useEffect(() => {
-    defaultObj = { ...defaultObj, ...receiveDataObj, ...cardDataObj }
-    console.log('defa', defaultObj)
+    setDefaultObj((cur) => ({ ...cur, ...receiveDataObj, ...cardDataObj }))
   }, [receiveDataObj, cardDataObj])
 
   const clickOrderBtn = () => {
     const iscorrectObj = checkTotalValid(defaultObj)
-    console.log(defaultObj.receive_address1)
     if (iscorrectObj) {
       axios
         .post('api/cart?type=order', {
@@ -113,9 +112,10 @@ export default function CartCardInfo({
           total_price: totalPrice,
           complete_yn: 'Y',
         })
-        .then((orderResponse) =>
-          console.log('orderResponse', orderResponse.data)
-        )
+        .then((orderResponse) => {
+          const { data } = orderResponse
+          // console.log('orderResponse', data)
+        })
         .catch((orderError) => console.log('orderError', orderError))
       axios
         .post('api/cart?type=modify', {
@@ -124,61 +124,17 @@ export default function CartCardInfo({
           product_id: '',
           user_id: userId,
         })
-        .then((orderCompleteResponse) =>
-          console.log('orderCompleteResponse', orderCompleteResponse.data)
-        )
+        .then((orderCompleteResponse) => {
+          // console.log('orderCompleteResponse', orderCompleteResponse.data)
+          // 결제 성공시 장바구니 리스트, totalPrice 리렌더링을 위한 set실행
+          // TODO 입력값들을 초기화 하는 기능은 구현
+          setOrderCheck((cur) => !cur)
+          successOrder()
+        })
         .catch((orderCompleteError) =>
           console.log('orderErorderCompleteErroror', orderCompleteError)
         )
     }
-  }
-
-  function checkTotalValid(obj) {
-    if (!obj.receive_user) {
-      alertNullData('받는 사람')
-      return
-    }
-    if (
-      !obj.receive_user_tel1 ||
-      !obj.receive_user_tel2 ||
-      !obj.receive_user_tel3
-    ) {
-      alertNullData('전화 번호')
-      return
-    }
-
-    if (
-      !obj.receive_address1 ||
-      !obj.receive_address2 ||
-      !obj.receive_address3
-    ) {
-      alertNullData('배송지 주소')
-      return
-    }
-
-    if (!obj.cart_dv) {
-      alertNullData('카드 선택')
-      return
-    }
-    if (!obj.card_user) {
-      alertNullData('카드 소유자명')
-      return
-    }
-    if (
-      !obj.card_number1 ||
-      !obj.card_number2 ||
-      !obj.card_number3 ||
-      !obj.card_number4
-    ) {
-      alertNullData('카드 번호')
-      return
-    }
-    if (!obj.card_month || !obj.card_year) {
-      alertNullData('카드 MM/YY')
-      return
-    }
-
-    return true
   }
 
   return (
@@ -237,6 +193,7 @@ export default function CartCardInfo({
               valid={cardNum1Valid}
               invalid={!cardNum1Valid}
               id='card_number1'
+              maxLength={4}
               onChange={(e) => changeInput(e)}
             ></Input>
           </Col>
@@ -245,6 +202,7 @@ export default function CartCardInfo({
               valid={cardNum2Valid}
               invalid={!cardNum2Valid}
               id='card_number2'
+              maxLength={4}
               onChange={(e) => changeInput(e)}
             ></Input>
           </Col>
@@ -253,6 +211,7 @@ export default function CartCardInfo({
               valid={cardNum3Valid}
               invalid={!cardNum3Valid}
               id='card_number3'
+              maxLength={4}
               onChange={(e) => changeInput(e)}
             ></Input>
           </Col>
@@ -261,6 +220,7 @@ export default function CartCardInfo({
               valid={cardNum4Valid}
               invalid={!cardNum4Valid}
               id='card_number4'
+              maxLength={4}
               onChange={(e) => changeInput(e)}
             ></Input>
           </Col>
@@ -278,6 +238,7 @@ export default function CartCardInfo({
               invalid={!cardMonthValid}
               id='card_month'
               placeholder='Month'
+              maxLength={2}
               onChange={(e) => changeInput(e)}
             ></Input>
           </Col>
@@ -290,6 +251,7 @@ export default function CartCardInfo({
               invalid={!cardYearValid}
               id='card_year'
               placeholder='Year'
+              maxLength={2}
               onChange={(e) => changeInput(e)}
             ></Input>
           </Col>
@@ -306,6 +268,7 @@ export default function CartCardInfo({
     </Card>
   )
 
+  // cartCardInfo 컴포넌트에서 작성되는 값 Valid 검사하는 함수
   function checkValid(obj) {
     const {
       cart_dv: cardName = '',
@@ -378,13 +341,66 @@ export default function CartCardInfo({
       setCardMonthValid(false)
       setCardDataObj((cur) => ({ ...cur, card_month: undefined }))
     }
-
-    if (cardYear.length === 2 && !/[^0-9]/g.test(cardYear))
+    const year = String(new Date().getFullYear()).slice(2)
+    if (
+      cardYear.length === 2 &&
+      !/[^0-9]/g.test(cardYear) &&
+      Number(cardYear) >= Number(year)
+    )
       setCardYearValid(true)
     else {
       setCardYearValid(false)
       setCardDataObj((cur) => ({ ...cur, card_year: undefined }))
     }
+  }
+
+  // 전체데이터들을 모아서 API를 호출하기 직전 적절한 데이터가 들어왔는지 확인하는 함수
+  function checkTotalValid(obj) {
+    if (!obj.receive_user) {
+      alertNullData('받는 사람')
+      return
+    }
+    if (
+      !obj.receive_user_tel1 ||
+      !obj.receive_user_tel2 ||
+      !obj.receive_user_tel3
+    ) {
+      alertNullData('전화 번호')
+      return
+    }
+
+    if (
+      !obj.receive_address1 ||
+      !obj.receive_address2 ||
+      !obj.receive_address3
+    ) {
+      alertNullData('배송지 주소')
+      return
+    }
+
+    if (!obj.cart_dv) {
+      alertNullData('카드 선택')
+      return
+    }
+    if (!obj.card_user) {
+      alertNullData('카드 소유자명')
+      return
+    }
+    if (
+      !obj.card_number1 ||
+      !obj.card_number2 ||
+      !obj.card_number3 ||
+      !obj.card_number4
+    ) {
+      alertNullData('카드 번호')
+      return
+    }
+    if (!obj.card_month || !obj.card_year) {
+      alertNullData('카드 MM/YY')
+      return
+    }
+
+    return true
   }
 }
 
@@ -393,6 +409,14 @@ function alertNullData(nullData) {
     title: `정보를 모두 정확히 입력해 주세요!`,
     text: `'${nullData}' 부분을 수정하세요!`,
     icon: 'error',
+    confirmButtonText: '확인',
+  })
+}
+
+function successOrder() {
+  Swal.fire({
+    title: `결제가 완료되었습니다.`,
+    icon: 'success',
     confirmButtonText: '확인',
   })
 }
