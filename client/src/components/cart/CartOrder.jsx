@@ -20,52 +20,13 @@ export default function CartOrder({ receiveDataObj, setReceiveDataObj }) {
   const [adr3Valid, setAdr3Valid] = useState(false)
 
   const changeInput = (e) => {
-    // receiveDataObj[e.target.id] = e.target.value
     setReceiveDataObj((cur) => ({ ...cur, [e.target.id]: e.target.value }))
   }
 
   useEffect(() => {
     checkValid(receiveDataObj)
-    console.log(receiveDataObj)
+    // console.log(receiveDataObj)
   }, [receiveDataObj])
-
-  function checkValid(obj) {
-    const {
-      receive_user: user = '',
-      receive_user_tel1: tel1 = '',
-      receive_user_tel2: tel2 = '',
-      receive_user_tel3: tel3 = '',
-      receive_address1: adr1 = '',
-      receive_address2: adr2 = '',
-      receive_address3: adr3 = '',
-    } = obj
-
-    // user valid 검사
-    if (user.length > 0 && /[^0-9]/g.test(user)) setNameValid(true)
-    else setNameValid(false)
-
-    // tel1,2,3 valid 검사
-    if (tel1.length === 3 && !/[^0-9]/g.test(tel1)) setTel1Valid(true)
-    else setTel1Valid(false)
-
-    if (tel2.length === 4 && !/[^0-9]/g.test(tel2)) setTel2Valid(true)
-    else setTel2Valid(false)
-
-    if (tel3.length === 4 && !/[^0-9]/g.test(tel3)) setTel3Valid(true)
-    else setTel3Valid(false)
-
-    // adr1,2,3 valid 검사
-    if (adr1.length > 0 && /[^0-9]/g.test(adr1) && /[시,도]$/g.test(adr1))
-      setAdr1Valid(true)
-    else setAdr1Valid(false)
-
-    if (adr2.length > 3) setAdr2Valid(true)
-    else setAdr2Valid(false)
-
-    if (adr3.length > 3 && /^[1-9]/g.test(adr3) && /[호]$/g.test(adr3))
-      setAdr3Valid(true)
-    else setAdr3Valid(false)
-  }
 
   return (
     <Card>
@@ -178,4 +139,42 @@ export default function CartOrder({ receiveDataObj, setReceiveDataObj }) {
       </CardBody>
     </Card>
   )
+
+  function checkValid(obj) {
+    const {
+      receive_user: user = '',
+      receive_user_tel1: tel1 = '',
+      receive_user_tel2: tel2 = '',
+      receive_user_tel3: tel3 = '',
+      receive_address1: adr1 = '',
+      receive_address2: adr2 = '',
+      receive_address3: adr3 = '',
+    } = obj
+
+    // user valid 검사
+    if (user.length > 0 && /[^0-9]/g.test(user)) setNameValid(true)
+    else setNameValid(false)
+
+    // tel1,2,3 valid 검사
+    if (tel1.length === 3 && !/[^0-9]/g.test(tel1)) setTel1Valid(true)
+    else setTel1Valid(false)
+
+    if (tel2.length === 4 && !/[^0-9]/g.test(tel2)) setTel2Valid(true)
+    else setTel2Valid(false)
+
+    if (tel3.length === 4 && !/[^0-9]/g.test(tel3)) setTel3Valid(true)
+    else setTel3Valid(false)
+
+    // adr1,2,3 valid 검사
+    if (adr1.length > 0 && /[^0-9]/g.test(adr1) && /[시,도]$/g.test(adr1))
+      setAdr1Valid(true)
+    else setAdr1Valid(false)
+
+    if (adr2.length > 3) setAdr2Valid(true)
+    else setAdr2Valid(false)
+
+    if (adr3.length > 3 && /^[1-9]/g.test(adr3) && /[호]$/g.test(adr3))
+      setAdr3Valid(true)
+    else setAdr3Valid(false)
+  }
 }
