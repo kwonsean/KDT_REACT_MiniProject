@@ -4,7 +4,7 @@ import { Card, CardBody, CardFooter, CardHeader, Col, Row } from 'reactstrap'
 import styled from '../naver/ShoppingList.module.css'
 import CartTotalPrice from './CartTotalPrice'
 
-export default function CartList({ userId, totalPrice }) {
+export default function CartList({ userId, totalPrice, orderCheck }) {
   const [cartList, setCartList] = useState([])
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export default function CartList({ userId, totalPrice }) {
         setCartList(data)
       })
       .catch((error) => console.log(error))
-  }, [])
+  }, [orderCheck])
 
   return (
     <div>
@@ -32,7 +32,7 @@ export default function CartList({ userId, totalPrice }) {
             overflow: 'scroll',
           }}
         >
-          {cartList.length > 0 && (
+          {cartList.length > 0 ? (
             <Row className={styled.rowTitle}>
               <Col xs='1'>상품이미지</Col>
               <Col xs='6'>상품 명</Col>
@@ -40,6 +40,10 @@ export default function CartList({ userId, totalPrice }) {
               <Col xs='1'>수량</Col>
               <Col xs='2'>합산 가격</Col>
             </Row>
+          ) : (
+            <h4 style={{ textAlign: 'center' }}>
+              장바구니에 담긴 물건이 없습니다.
+            </h4>
           )}
           {cartList.length > 0 &&
             cartList.map((item) => {
