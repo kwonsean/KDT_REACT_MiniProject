@@ -4,7 +4,7 @@ import { Card, CardBody, CardFooter, CardHeader, Col, Row } from 'reactstrap'
 import styled from '../naver/ShoppingList.module.css'
 import CartTotalPrice from './CartTotalPrice'
 
-export default function CartList({ userId, cartId }) {
+export default function CartList({ userId, cartId, totalPrice }) {
   const [cartList, setCartList] = useState([])
 
   useEffect(() => {
@@ -73,7 +73,7 @@ export default function CartList({ userId, cartId }) {
             })}
         </CardBody>
         <CardFooter>
-          <CartTotalPrice userId={userId} cartId={cartId} />
+          <CartTotalPrice totalPrice={totalPrice} />
         </CardFooter>
       </Card>
     </div>
