@@ -18,15 +18,17 @@ export default function CartOrder({ receiveDataObj, setReceiveDataObj }) {
   const [adr1Valid, setAdr1Valid] = useState(false)
   const [adr2Valid, setAdr2Valid] = useState(false)
   const [adr3Valid, setAdr3Valid] = useState(false)
+  const [changeInputCheck, setChangeInputCheck] = useState(true)
 
   const changeInput = (e) => {
     setReceiveDataObj((cur) => ({ ...cur, [e.target.id]: e.target.value }))
+    setChangeInputCheck((cur) => !cur)
   }
 
   useEffect(() => {
     checkValid(receiveDataObj)
     // console.log(receiveDataObj)
-  }, [receiveDataObj])
+  }, [changeInputCheck])
 
   return (
     <Card>
@@ -153,28 +155,49 @@ export default function CartOrder({ receiveDataObj, setReceiveDataObj }) {
 
     // user valid 검사
     if (user.length > 0 && /[^0-9]/g.test(user)) setNameValid(true)
-    else setNameValid(false)
+    else {
+      setNameValid(false)
+      setReceiveDataObj((cur) => ({ ...cur, receive_user: undefined }))
+    }
 
     // tel1,2,3 valid 검사
     if (tel1.length === 3 && !/[^0-9]/g.test(tel1)) setTel1Valid(true)
-    else setTel1Valid(false)
+    else {
+      setTel1Valid(false)
+      setReceiveDataObj((cur) => ({ ...cur, receive_user_tel1: undefined }))
+    }
 
     if (tel2.length === 4 && !/[^0-9]/g.test(tel2)) setTel2Valid(true)
-    else setTel2Valid(false)
+    else {
+      setTel2Valid(false)
+      setReceiveDataObj((cur) => ({ ...cur, receive_user_tel2: undefined }))
+    }
 
     if (tel3.length === 4 && !/[^0-9]/g.test(tel3)) setTel3Valid(true)
-    else setTel3Valid(false)
+    else {
+      setTel3Valid(false)
+      setReceiveDataObj((cur) => ({ ...cur, receive_user_tel3: undefined }))
+    }
 
     // adr1,2,3 valid 검사
     if (adr1.length > 0 && /[^0-9]/g.test(adr1) && /[시,도]$/g.test(adr1))
       setAdr1Valid(true)
-    else setAdr1Valid(false)
+    else {
+      setAdr1Valid(false)
+      setReceiveDataObj((cur) => ({ ...cur, receive_address1: undefined }))
+    }
 
     if (adr2.length > 3) setAdr2Valid(true)
-    else setAdr2Valid(false)
+    else {
+      setAdr2Valid(false)
+      setReceiveDataObj((cur) => ({ ...cur, receive_address2: undefined }))
+    }
 
     if (adr3.length > 3 && /^[1-9]/g.test(adr3) && /[호]$/g.test(adr3))
       setAdr3Valid(true)
-    else setAdr3Valid(false)
+    else {
+      setAdr3Valid(false)
+      setReceiveDataObj((cur) => ({ ...cur, receive_address3: undefined }))
+    }
   }
 }
