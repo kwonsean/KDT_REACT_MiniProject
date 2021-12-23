@@ -110,6 +110,7 @@ const Login = (props) => {
           </InputGroupText>
           <Input
             placeholder='Password'
+            type='password'
             onChange={(e) => setUserPassword(e.target.value)}
           />
         </InputGroup>
