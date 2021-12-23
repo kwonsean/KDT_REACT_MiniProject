@@ -1,11 +1,14 @@
-import React from "react";
+import React from 'react'
+import { Container } from 'reactstrap'
+import HistoryList from './HistoryList'
 
-const History = (props) => {
+const History = ({ cartId, userId }) => {
   return (
-    <div>
+    <Container>
       <h2>사용자 구매내역</h2>
-    </div>
-  );
-};
+      <HistoryList userId={userId} />
+    </Container>
+  )
+}
 
-export default History;
+export default History
