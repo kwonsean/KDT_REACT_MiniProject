@@ -66,7 +66,7 @@ export default function ChartDetail({ userId, selectedCategory }) {
       }}
     >
       {finalDetailData.length > 0 ? (
-        <Card>
+        <Card style={{ boxShadow: 'rgba(0, 0, 0, 0.04) 0px 3px 5px' }}>
           <CardHeader>
             <h4 style={{ marginBottom: 0 }}>{selectedCategory} 카테고리</h4>
           </CardHeader>
