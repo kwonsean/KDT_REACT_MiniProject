@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Button, Col, Input, Row } from 'reactstrap'
+import { Button, Col, Row } from 'reactstrap'
 import styled from '../naver/ShoppingList.module.css'
 
 export default function DetailHistoryInfo({
@@ -17,8 +17,12 @@ export default function DetailHistoryInfo({
         user_id,
         order_id,
       })
-      .then((response) => setItem(response.data.json))
+      .then((response) => {
+        // console.log(response.data.json)
+        setItem(response.data.json)
+      })
       .catch((error) => console.log(error))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
@@ -55,7 +59,11 @@ export default function DetailHistoryInfo({
       <Row>
         <Col sx='8'></Col>
         <Col xs='4' style={{ textAlign: 'right' }}>
-          <Button onClick={() => setShowDetail(!showDetail)}>
+          <Button
+            onClick={() => {
+              setShowDetail(!showDetail)
+            }}
+          >
             결제 정보 보기
           </Button>
         </Col>

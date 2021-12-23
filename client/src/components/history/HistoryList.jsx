@@ -1,8 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Card, CardBody, CardFooter, CardHeader } from 'reactstrap'
-import DefaultHistoryInfo from './DefaultHistoryInfo'
-import DetailHistoryInfo from './DetailHistoryInfo'
+import { Card, CardBody, CardFooter, CardHeader, Input } from 'reactstrap'
+import HistoryBody from './HistoryBody'
 
 const year = String(new Date().getFullYear())
 const month = String(new Date().getMonth() + 1)
@@ -10,7 +9,6 @@ const day = String(new Date().getDate())
 
 export default function HistoryList({ userId }) {
   const [orderList, setOrderList] = useState([])
-  const [showDetail, setShowDetail] = useState(true)
 
   useEffect(() => {
     axios
@@ -39,20 +37,7 @@ export default function HistoryList({ userId }) {
             <span> {item.order_id}</span>
           </CardHeader>
           <CardBody style={{ maxHeight: 400, overflow: 'scroll' }}>
-            {showDetail ? (
-              <DefaultHistoryInfo
-                item={item}
-                setShowDetail={setShowDetail}
-                showDetail={showDetail}
-              />
-            ) : (
-              <DetailHistoryInfo
-                order_id={item.order_id}
-                user_id={userId}
-                setShowDetail={setShowDetail}
-                showDetail={showDetail}
-              />
-            )}
+            <HistoryBody item={item} userId={userId} />
           </CardBody>
           <CardFooter style={{ textAlign: 'right' }}>
             전체 결제 금액

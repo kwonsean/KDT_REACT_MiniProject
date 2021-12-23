@@ -29,7 +29,11 @@ export default function DefaultHistoryInfo({
       <Row>
         <Col sx='9'></Col>
         <Col xs='3'>
-          <Button onClick={() => setShowDetail(!showDetail)}>
+          <Button
+            onClick={(e) => {
+              setShowDetail(!showDetail)
+            }}
+          >
             상세 정보 보기
           </Button>
         </Col>
