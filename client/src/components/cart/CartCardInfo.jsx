@@ -7,6 +7,7 @@ import {
   CardFooter,
   CardHeader,
   Col,
+  FormFeedback,
   Input,
   Label,
   Row,
@@ -59,6 +60,7 @@ export default function CartCardInfo({
   useEffect(() => {
     checkValid(cardDataObj)
     // console.log('cardDataObj', cardDataObj)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [changeInputCheck])
 
   const [defaultObj, setDefaultObj] = useState({
@@ -113,7 +115,7 @@ export default function CartCardInfo({
           complete_yn: 'Y',
         })
         .then((orderResponse) => {
-          const { data } = orderResponse
+          // const { data } = orderResponse
           // console.log('orderResponse', data)
         })
         .catch((orderError) => console.log('orderError', orderError))
@@ -241,6 +243,7 @@ export default function CartCardInfo({
               maxLength={2}
               onChange={(e) => changeInput(e)}
             ></Input>
+            <FormFeedback>ex. 01</FormFeedback>
           </Col>
           <Col xs='1' style={{ textAlign: 'center' }}>
             /
