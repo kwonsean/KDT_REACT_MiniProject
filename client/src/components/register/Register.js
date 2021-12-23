@@ -1,11 +1,14 @@
-import React from "react";
+import React from 'react'
+import { Container } from 'reactstrap'
+import RegisterForm from './RegisterForm'
 
 const Register = (props) => {
   return (
-    <div>
+    <Container>
       <h2>회원가입</h2>
-    </div>
-  );
-};
+      <RegisterForm />
+    </Container>
+  )
+}
 
-export default Register;
+export default Register
