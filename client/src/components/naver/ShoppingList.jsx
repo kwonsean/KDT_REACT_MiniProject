@@ -30,6 +30,7 @@ export default function ShoppingList({
       title,
     } = item
     console.log(item)
+    // TODO 찜목록에 이미 있다면? 버튼 비활성화 or 취소
     Swal.fire({
       title: '상품을 찜 하시겠습니까?',
       text: `상품 가격은 ${l_price.replace(
@@ -60,7 +61,7 @@ export default function ShoppingList({
             product_id,
             product_type,
             title,
-            product_count: 1,
+            product_count: 0,
           })
           .then((response) => {
             console.log(response)

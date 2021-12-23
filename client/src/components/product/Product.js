@@ -30,6 +30,7 @@ const Product = ({ userId, cartId }) => {
   }
   useEffect(() => {
     selectedProductList()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
     <Container>

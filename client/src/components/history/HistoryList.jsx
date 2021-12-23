@@ -1,16 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Col,
-  FormFeedback,
-  Input,
-  Label,
-  Row,
-} from 'reactstrap'
+import { Card, CardBody, CardFooter, CardHeader } from 'reactstrap'
 import DefaultHistoryInfo from './DefaultHistoryInfo'
 import DetailHistoryInfo from './DetailHistoryInfo'
 
@@ -35,15 +25,13 @@ export default function HistoryList({ userId }) {
       .catch((error) => console.log(error))
   }, [])
 
-  const clickBody = () => {
-    setShowDetail((cur) => !cur)
-  }
-
-  console.log(orderList)
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap' }}>
       {orderList.map((item) => (
-        <Card style={{ margin: '0 2.5% 20px 2.5%', width: '45%' }}>
+        <Card
+          style={{ margin: '0 2.5% 20px 2.5%', width: '45%' }}
+          key={item.order_id}
+        >
           <CardHeader>
             <h6 style={{ display: 'inline-block', marginRight: 10 }}>
               주문 번호

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Button, Col, Input, Row } from 'reactstrap'
 import styled from '../naver/ShoppingList.module.css'
 import Swal from 'sweetalert2'
@@ -69,7 +69,7 @@ export default function ProductList({
       mall_name,
       product_id,
       product_type,
-      product_count,
+      // product_count,
       title,
       addCount,
     } = selectedItem
@@ -165,42 +165,39 @@ export default function ProductList({
         </Row>
       )}
       {zzimList.length > 0 &&
-        zzimList.map((item) => {
-          const htmlTitle = item.title
-          return (
-            <Row key={item.productId} className={styled.row}>
-              <Col xs='1'>
-                <img alt='item' src={item.image} width='100%' />
-              </Col>
-              <Col xs='6'>
-                <h5
-                  className={styled.title}
-                  dangerouslySetInnerHTML={{ __html: htmlTitle }}
-                ></h5>
-              </Col>
-              <Col xs='2'>
-                <span>
-                  {item.l_price.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 원
-                </span>
-              </Col>
-              <Col xs='1'>
-                <Input type='select' onChange={(e) => selectBuyCount(e, item)}>
-                  {buyCount.map((count, index) => (
-                    <option key={index} value={count}>
-                      {count}
-                    </option>
-                  ))}
-                </Input>
-              </Col>
-              <Col xs='1'>
-                <Button onClick={() => clickSaveItemBtn(item)}>담기</Button>
-              </Col>
-              <Col xs='1'>
-                <Button onClick={() => clickDeleteItemBtn(item)}>삭제</Button>
-              </Col>
-            </Row>
-          )
-        })}
+        zzimList.map((item) => (
+          <Row key={item.productId} className={styled.row}>
+            <Col xs='1'>
+              <img alt='item' src={item.image} width='100%' />
+            </Col>
+            <Col xs='6'>
+              <h5
+                className={styled.title}
+                dangerouslySetInnerHTML={{ __html: item.title }}
+              ></h5>
+            </Col>
+            <Col xs='2'>
+              <span>
+                {item.l_price.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 원
+              </span>
+            </Col>
+            <Col xs='1'>
+              <Input type='select' onChange={(e) => selectBuyCount(e, item)}>
+                {buyCount.map((count, index) => (
+                  <option key={index} value={count}>
+                    {count}
+                  </option>
+                ))}
+              </Input>
+            </Col>
+            <Col xs='1'>
+              <Button onClick={() => clickSaveItemBtn(item)}>담기</Button>
+            </Col>
+            <Col xs='1'>
+              <Button onClick={() => clickDeleteItemBtn(item)}>삭제</Button>
+            </Col>
+          </Row>
+        ))}
     </>
   )
 }
