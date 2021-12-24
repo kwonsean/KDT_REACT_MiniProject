@@ -11,7 +11,7 @@ export default function PaginationComponent({
   const totalEndPage = Math.floor(totalResults / 10)
   // console.log('totalEndPage', totalEndPage)
 
-  // 가능한 마지막 요소 조회가 1000까지라 이 이상 넘어가면 막아줘야함
+  // 가능한 마지막 요소 조회가 1000까지라 이 이상 넘어가면 막아줘야함 (API start가 1000까지가 제한)
   let possibleEndPagePoint = parseInt(totalEndPage / 5) * 5
   possibleEndPagePoint = possibleEndPagePoint > 100 ? 95 : possibleEndPagePoint
 
@@ -58,12 +58,12 @@ export default function PaginationComponent({
     axios
       .post('api/naverApi?type=shopList', {
         query: selectedText,
-        page: pagePoint + 1, // 1, 2, 3, 4, 5
+        start: 10 * pagePoint + 1, // 1, 2, 3, 4, 5
       })
       .then((response) => {
         // console.log(response)
-        // const { itemList } = response.data
-        // setSearchList(itemList)
+        const { items } = response.data
+        setSearchList(items)
       })
       .catch((error) => {
         console.log(error)
@@ -88,12 +88,12 @@ export default function PaginationComponent({
     axios
       .post('api/naverApi?type=shopList', {
         query: selectedText,
-        start: value, // 1, 2, 3, 4, 5
+        start: value === 1 ? 0 : 10 * (value - 1) + 1, // 1, 2, 3, 4, 5
       })
       .then((response) => {
         // console.log(response)
-        // const { itemList } = response.data
-        // setSearchList(itemList)
+        const { items } = response.data
+        setSearchList(items)
       })
       .catch((error) => {
         console.log(error)
