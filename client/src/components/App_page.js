@@ -1,3 +1,5 @@
+// 수업에 사용한 파일이므로 리뷰를 안하셔도 됩니다!
+
 import 'bootstrap/dist/css/bootstrap.css'
 import { useEffect, useState } from 'react'
 import PageV1 from './page/PageV1'

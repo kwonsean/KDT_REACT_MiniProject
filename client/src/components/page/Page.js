@@ -1,3 +1,5 @@
+// 수업에 사용한 파일이므로 리뷰를 안하셔도 됩니다!
+
 import React, { useEffect } from 'react'
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap'
 

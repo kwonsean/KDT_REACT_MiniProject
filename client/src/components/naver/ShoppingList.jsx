@@ -29,8 +29,8 @@ export default function ShoppingList({
       productType: product_type,
       title,
     } = item
-    console.log(item)
-    // TODO 찜목록에 이미 있다면? 버튼 비활성화 or 취소
+    // console.log(item)
+    // TODO 찜목록에 이미 있다면? 버튼 비활성화 or 취소 => 근데 찜목록에 중복으로 들어가진 않아서 굳이 필요하진 않은 기능이라고 판단.
     Swal.fire({
       title: '상품을 찜 하시겠습니까?',
       text: `상품 가격은 ${l_price.replace(
@@ -64,7 +64,7 @@ export default function ShoppingList({
             product_count: 0,
           })
           .then((response) => {
-            console.log(response)
+            // console.log(response)
             Swal.fire({
               title: `${title}을 찜 하였습니다.`,
               imageUrl: `${image}`,

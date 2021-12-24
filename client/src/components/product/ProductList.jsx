@@ -135,7 +135,7 @@ export default function ProductList({
             product_id: item.product_id,
           })
           .then((response) => {
-            console.log(response)
+            // console.log(response)
             Swal.fire({
               title: `삭제하였습니다.`,
               text: `상품을 찜 목록에서 삭제하였습니다.`,

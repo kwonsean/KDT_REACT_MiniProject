@@ -18,7 +18,7 @@ export default function UpdateItem({
   data,
   selectAllBoardList,
 }) {
-  console.log(data)
+  // console.log(data)
   const [title, setTitle] = useState(data.title)
   const [content, setContent] = useState(data.content)
   const [checkPw, setCheckPw] = useState(true)

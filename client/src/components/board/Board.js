@@ -42,9 +42,9 @@ const Board = () => {
     selectBoardPage(1)
   }, [allBoardList])
 
-  useEffect(() => {
-    console.log('boardList', boardList)
-  }, [boardList])
+  // useEffect(() => {
+  //   console.log('boardList', boardList)
+  // }, [boardList])
 
   return (
     <Container>

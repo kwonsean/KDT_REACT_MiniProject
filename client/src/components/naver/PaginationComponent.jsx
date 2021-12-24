@@ -61,7 +61,7 @@ export default function PaginationComponent({
         page: pagePoint + 1, // 1, 2, 3, 4, 5
       })
       .then((response) => {
-        console.log(response)
+        // console.log(response)
         // const { itemList } = response.data
         // setSearchList(itemList)
       })
@@ -91,7 +91,7 @@ export default function PaginationComponent({
         start: value, // 1, 2, 3, 4, 5
       })
       .then((response) => {
-        console.log(response)
+        // console.log(response)
         // const { itemList } = response.data
         // setSearchList(itemList)
       })

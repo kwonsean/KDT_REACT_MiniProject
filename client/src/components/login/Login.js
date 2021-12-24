@@ -69,7 +69,6 @@ const Login = (props) => {
 
   const sweetalert = (title, showConfirmButton, icon) => {
     Swal.fire({
-      position: 'bottom-end',
       icon: icon,
       title: title,
       showConfirmButton: showConfirmButton,

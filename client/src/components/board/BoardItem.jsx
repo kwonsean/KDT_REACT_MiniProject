@@ -17,7 +17,7 @@ function BoardItem({ index, boardData, selectAllBoardList, plusIndex }) {
 
   const clickItem = () => {
     upCount()
-    selectAllBoardList()
+    // selectAllBoardList()
     setShowDetail(true)
   }
 

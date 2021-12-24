@@ -70,7 +70,7 @@ export default function RegisterForm() {
         user_org: org,
       })
       .then((response) => {
-        console.log(response)
+        // console.log(response)
         success(`회원가입에 성공하였습니다!`)
         setTimeout(() => {
           window.location.href = '/naverApi'
