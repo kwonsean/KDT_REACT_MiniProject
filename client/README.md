@@ -1,70 +1,33 @@
-# Getting Started with Create React App
+# 최저가 상품 구매 사이트 구축
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- 과제 기간: 12월 16일(목) ~ 12월 23일(목)
 
-## Available Scripts
+## 요구사항
 
-In the project directory, you can run:
+### 필수 요구사항
 
-### `npm start`
+- [x] Table 구조를 보고 적절한 화면을 구성하세요.(3점)
+- [ ] 제공된 API를 모두 사용하세요.(3점)
+  > 페이징 관련, user Update API 사용 X
+- [x] 회원가입 부터 모든 프로세스가 정상 수행되어야 합니다. (3점)
+- [x] 디자인이 일관 되게 구성되어야 합니다.(3점)
+- [ ] 목록 화면에서 페이징 처리를 진행하세요.(3점)
+  > 게시판, 상품검색 페이지만 페이징 처리 진행
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 선택 요구사항
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- [ ] 직접 서버 api를 만들어 보세요.(4점)
+- [x] 제한된 시간안에 모든 화면을 완성해 보세요. (3점)
+- [x] Component는 Function 방식으로 개발. (3점)
+- [x] 다양한 컴포넌트를 사용해서 완성 하세요.(2점)
+- [ ] 상세 화면의 모든 input에는 사이즈제한이 걸려야 합니다.(2점)
+  > 일부 요소에만 사이즈 제한 및 valid 체크 (필수요소)
+- [x] 필수 항목에 대해서는 특정한 표시를 해야 합니다.(2점)
 
-### `npm test`
+## API 사용법
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- API는 별도 제공합니다.
 
-### `npm run build`
+## Table 정보
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Table 정보는 별도 제공합니다.
