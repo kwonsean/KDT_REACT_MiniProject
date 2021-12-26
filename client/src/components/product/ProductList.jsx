@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Col, Input, Row } from 'reactstrap'
 import styled from '../naver/ShoppingList.module.css'
 import Swal from 'sweetalert2'
@@ -11,6 +11,7 @@ export default function ProductList({
   cartId,
 }) {
   // console.log('zzim!', zzimList)
+  const [defaultValue, setDefaultValue] = useState(false)
   const buyCount = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   let selectedItems = []
 
@@ -19,6 +20,7 @@ export default function ProductList({
   // 수량이 변경될때마다 아이템들을 저장하는 배열 생성
   const selectBuyCount = (e, item) => {
     item = { ...item, addCount: Number(e.target.value) }
+    setDefaultValue(false)
     // console.log(item)
 
     // id가 유일하면 true 이미 있으면 false
@@ -108,6 +110,7 @@ export default function ProductList({
           .then((cartSaveResponse) => {
             // console.log('cartSaveResponse', cartSaveResponse)
             successSaveCart(addCount)
+            setDefaultValue(true)
           })
           .catch((cartSaveError) => {
             console.log(cartSaveError)
@@ -143,6 +146,7 @@ export default function ProductList({
               confirmButtonText: '확인',
             })
             selectedProductList()
+            setDefaultValue(false)
           })
           .catch((error) => {
             console.log(error)
@@ -182,7 +186,11 @@ export default function ProductList({
               </span>
             </Col>
             <Col xs='1'>
-              <Input type='select' onChange={(e) => selectBuyCount(e, item)}>
+              <Input
+                type='select'
+                value={defaultValue ? 0 : null}
+                onChange={(e) => selectBuyCount(e, item)}
+              >
                 {buyCount.map((count, index) => (
                   <option key={index} value={count}>
                     {count}
