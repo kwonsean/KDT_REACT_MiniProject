@@ -337,7 +337,8 @@ export default function CartCardInfo({
     if (
       cardMonth.length === 2 &&
       !/[^0-9]/g.test(cardMonth) &&
-      Number(cardMonth) <= 12
+      Number(cardMonth) <= 12 &&
+      Number(cardMonth) !== 0
     )
       setCardMonthValid(true)
     else {
