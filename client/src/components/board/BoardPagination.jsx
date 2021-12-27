@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useState } from 'react/cjs/react.development'
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap'
 
+// TODO 전체 페이지 갯수를 파악해서 마지막 페이지 찾고-> 그이상 조회시 막기
 export default function BoardPagination({ selectBoardPage, setPLusIndex }) {
   const [pagePoint, setPagePoint] = useState(0)
 
