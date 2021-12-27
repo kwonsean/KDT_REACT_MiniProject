@@ -141,7 +141,7 @@
 
 > 전체 구매데이터 시각화 및 카테고리 클릭시 카테고리 별 결제 내역 조회
 
-![차트](https://user-images.githubusercontent.com/60686984/147477560-f014a00a-32b4-479b-9867-9af456ba13d7.jpg)
+![차트](https://user-images.githubusercontent.com/60686984/147479236-35ee7a99-4602-4de6-a137-780819355dce.gif)
 
 2. 기간별 결제 내역 검색 기능
 
